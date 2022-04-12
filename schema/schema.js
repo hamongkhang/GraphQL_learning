@@ -15,6 +15,8 @@ type Author{
 type Query{
     books:[Book]
     authors:[Author]
+    book(id:ID!):Book
+    author(id:ID!):Author
 }
 `
 module.exports=typeDefs

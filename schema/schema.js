@@ -6,9 +6,15 @@ type Book {
     name:String
     genre:String
 }
+type Author{
+    id:ID!
+    name:String
+    age:Int
 
+}
 type Query{
     books:[Book]
+    authors:[Author]
 }
 `
 module.exports=typeDefs

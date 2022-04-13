@@ -19,5 +19,9 @@ type Query{
     book(id:ID!):Book
     author(id:ID!):Author
 }
+type Mutation{
+    createAuthor(id:ID!,name:String,age:Int):Author
+    createBook(id:ID!,name:String,genre:String,authorId:Int):Book
+}
 `
 module.exports=typeDefs

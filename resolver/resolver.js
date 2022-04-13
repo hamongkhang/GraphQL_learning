@@ -11,8 +11,11 @@ const resolvers={
         author:(parent,args)=>authors.find(author=>parent.authorId==author.id)
     },
     Author:{
-        // books:(parent,args)=>books.filter(book=>book.id==parent.id)
         books:(parent,args)=>books.filter(book=>book.authorId==parent.id)
+    },
+    Mutation:{
+        createAuthor:(parent,args)=>args,
+        createBook:(parent,args)=>args
     }
 }
 module.exports=resolvers

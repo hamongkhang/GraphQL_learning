@@ -1,5 +1,7 @@
 const { argsToArgsConfig } = require('graphql/type/definition')
 const {books,authors} =require('../data/static')
+const Author =require('../models/Author')
+const Book =require('../models/Book')
 const resolvers={
     Query:{
         books:()=>books,

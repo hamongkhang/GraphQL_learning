@@ -21,7 +21,7 @@ type Query{
 }
 type Mutation{
     createAuthor(name:String,age:Int):Author
-    createBook(name:String,genre:String,authorId:Int):Book
+    createBook(name:String,genre:String,authorId:String):Book
 }
 `
 module.exports=typeDefs

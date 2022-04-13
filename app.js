@@ -3,10 +3,12 @@ const {ApolloServer} = require('apollo-server-express')
 const mongoose=require('mongoose')
 const typeDefs =require('./schema/schema')
 const resolvers=require('./resolver/resolver')
+const getMethods =require('./data/database')
 
 const server= new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    context:()=>({getMethods})
 })
 
 //Connect to MongoDB

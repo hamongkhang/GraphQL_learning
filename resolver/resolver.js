@@ -4,8 +4,12 @@ const Author =require('../models/Author')
 const Book =require('../models/Book')
 const resolvers={
     Query:{
-        books:()=>books,
-        authors:()=>authors,
+        books:(parent,args,context)=>{
+            return context.getMethods.getAllBooks()
+        },
+        authors:(parent,args,context)=>{
+            return context.getMethods.getAllAuthors()
+        },
         book:(parent,args)=>books.find(book=>book.id==args.id),
         author:(parent,args)=>authors.find(author=>author.id==args.id),
     },

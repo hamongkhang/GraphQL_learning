@@ -1,22 +1,18 @@
+const { argsToArgsConfig } = require('graphql/type/definition')
+const {books,authors} =require('../data/static')
 const resolvers={
     Query:{
-        books:()=>[
-            {
-                id:1,
-                name:'Sach loai 1',
-                genre:"Tieu Thuyet"
-            },
-            {
-                id:2,
-                name:'Sach loai 2',
-                genre:"Truyen co tich"
-            },
-            {
-                id:3,
-                name:'Sach loai 3',
-                genre:"Truyen ngan"
-            }
-        ]
+        books:()=>books,
+        authors:()=>authors,
+        book:(parent,args)=>books.find(book=>book.id==args.id),
+        author:(parent,args)=>authors.find(author=>author.id==args.id),
+    },
+    Book:{
+        author:(parent,args)=>authors.find(author=>parent.authorId==author.id)
+    },
+    Author:{
+        // books:(parent,args)=>books.filter(book=>book.id==parent.id)
+        books:(parent,args)=>books.filter(book=>book.authorId==parent.id)
     }
 }
 module.exports=resolvers

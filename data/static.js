@@ -2,17 +2,20 @@ const books=[
     {
         id:1,
         name:'Sach loai 1',
-        genre:"Tieu Thuyet"
+        genre:"Tieu Thuyet",
+        authorId:1
     },
     {
         id:2,
         name:'Sach loai 2',
-        genre:"Truyen co tich"
+        genre:"Truyen co tich",
+        authorId:1
     },
     {
         id:3,
         name:'Sach loai 3',
-        genre:"Truyen ngan"
+        genre:"Truyen ngan",
+        authorId:2
     }
 ]
 const authors=[

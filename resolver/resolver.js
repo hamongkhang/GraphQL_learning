@@ -5,7 +5,14 @@ const resolvers={
         books:()=>books,
         authors:()=>authors,
         book:(parent,args)=>books.find(book=>book.id==args.id),
-        author:(parent,args)=>authors.find(author=>author.id==args.id)
+        author:(parent,args)=>authors.find(author=>author.id==args.id),
     },
+    Book:{
+        author:(parent,args)=>authors.find(author=>parent.authorId==author.id)
+    },
+    Author:{
+        // books:(parent,args)=>books.filter(book=>book.id==parent.id)
+        books:(parent,args)=>books.filter(book=>book.authorId==parent.id)
+    }
 }
 module.exports=resolvers

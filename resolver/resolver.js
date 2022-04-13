@@ -9,15 +9,21 @@ const resolvers={
         book:async(parent,{id},{getMethods})=>await getMethods.getOneBook(id),
         author:async(parent,{id},{getMethods})=>await getMethods.getOneAuthor(id)
     },
-    Book:{
-        author:(parent,args)=>authors.find(author=>parent.authorId==author.id)
-    },
-    Author:{
-        books:(parent,args)=>books.filter(book=>book.authorId==parent.id)
-    },
+
+    
+	Book: {
+		author: async ({ authorId }, args, { getMethods }) =>
+			await getMethods.getOneAuthor(authorId)
+	},
+
+	Author: {
+		books: async ({ id }, args, { getMethods }) =>
+			await getMethods.getAllBooks({ authorId: id })
+	},
+
     Mutation:{
         createAuthor: async(parent,args,{getMethods})=>await getMethods.createAuthor(args),
-        createBook:async(parent,args)=>await getMethods.createBook(args),
+        createBook:async(parent,args,{getMethods})=>await getMethods.createBook(args),
     }
 }
 module.exports=resolvers

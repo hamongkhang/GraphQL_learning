@@ -4,14 +4,10 @@ const Author =require('../models/Author')
 const Book =require('../models/Book')
 const resolvers={
     Query:{
-        books:(parent,args,context)=>{
-            return context.getMethods.getAllBooks()
-        },
-        authors:(parent,args,context)=>{
-            return context.getMethods.getAllAuthors()
-        },
-        book:(parent,args)=>books.find(book=>book.id==args.id),
-        author:(parent,args)=>authors.find(author=>author.id==args.id),
+        books:async(parent,args,{getMethods})=>await getMethods.getAllBooks(),
+        authors:async (parent,args,{getMethods})=>await getMethods.getAllAuthors(),
+        book:async(parent,{id},{getMethods})=>await getMethods.getOneBook(id),
+        author:async(parent,{id},{getMethods})=>await getMethods.getOneAuthor(id)
     },
     Book:{
         author:(parent,args)=>authors.find(author=>parent.authorId==author.id)
@@ -20,14 +16,8 @@ const resolvers={
         books:(parent,args)=>books.filter(book=>book.authorId==parent.id)
     },
     Mutation:{
-        createAuthor: async(parent,args)=>{
-            const newAuthor=new Author(args)
-            return await newAuthor.save()
-        },
-        createBook:async(parent,args)=>{
-            const newBook=new Book(args)
-            return await newBook.save()
-        }
+        createAuthor: async(parent,args,{getMethods})=>await getMethods.createAuthor(args),
+        createBook:async(parent,args)=>await getMethods.createBook(args),
     }
 }
 module.exports=resolvers
